@@ -6,8 +6,11 @@ services:
     umanit_front_static_controller:
         class: Umanit\FrontBundle\Controller\StaticController
         calls:
-            - [setContainer, ['@service_container']]
-        tags: ['controller.service_arguments']
+            - [setContainer, ['@Psr\Container\ContainerInterface']]
+        tags:
+            - { name: 'controller.service_arguments' }
+            - { name: 'container.service_subscriber' }
+        autoconfigure: true
 
     Umanit\FrontBundle\Controller\StaticController:
         alias: umanit_front_static_controller
